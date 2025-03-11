@@ -42,6 +42,7 @@ To get started, clone this repository to your local machine:
 
 ```sh
 git clone https://github.com/PBillingsby/lilypad-rag-agent.git
+cd lilypad-rag-agent
 ```
 
 ### **2. Set Up Your API Key**
@@ -54,12 +55,12 @@ Export your API key as an environment variable:
 ### **3. Install Dependencies**
 
 Ensure you have Python 3 installed, then install the required dependencies:
-`pip install -r ./lilypad-rag-agent/requirements.txt`
+`pip install -r requirements.txt`
 
 ### **4. Run the Agent**
 
 Run the agent from the root directory of the repository:
-`python3 -m lilypad_rag_agent.cli`
+`python3 cli.py`
 
 ## **Contributing**
 

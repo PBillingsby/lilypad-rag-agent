@@ -1,9 +1,9 @@
 import os
 import requests
 import json
-from lilypad_rag_agent.config import LILYPAD_API_URL, DEFAULT_MODEL, DEFAULT_MAX_TOKENS, DEFAULT_TEMPERATURE
-from lilypad_rag_agent.logger import logger
-from lilypad_rag_agent.ui import ThinkingAnimation
+from config import LILYPAD_API_URL, DEFAULT_MODEL, DEFAULT_MAX_TOKENS, DEFAULT_TEMPERATURE
+from logger import logger
+from ui import ThinkingAnimation
 
 class LilypadClient:
     """Handles interaction with Lilypad API"""

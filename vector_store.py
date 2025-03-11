@@ -2,8 +2,8 @@ import os
 import shutil
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
-from lilypad_rag_agent.config import VECTOR_STORE_DIR, DEFAULT_EMBEDDING_MODEL
-from lilypad_rag_agent.logger import logger
+from config import VECTOR_STORE_DIR, DEFAULT_EMBEDDING_MODEL
+from logger import logger
 from langchain.docstore.document import Document
 from typing import List
 

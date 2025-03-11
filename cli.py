@@ -1,10 +1,10 @@
 import argparse
 import os
 import sys
-from lilypad_rag_agent.rag_agent import LilypadRAGAgent
-from lilypad_rag_agent.logger import setup_logging, logger  # ✅ Import both logger and setup_logging
-from lilypad_rag_agent.ui import ThinkingAnimation
-from lilypad_rag_agent.config import DEFAULT_DOCUMENT_PATH
+from rag_agent import LilypadRAGAgent
+from logger import setup_logging, logger  # ✅ Import both logger and setup_logging
+from ui import ThinkingAnimation
+from config import DEFAULT_DOCUMENT_PATH
 
 # ✅ Call logging setup FIRST
 setup_logging()

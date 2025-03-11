@@ -1,9 +1,9 @@
-from lilypad_rag_agent.document_processing import DocumentProcessor
-from lilypad_rag_agent.vector_store import VectorStore
-from lilypad_rag_agent.keyword_retriever import KeywordRetriever
-from lilypad_rag_agent.api_client import LilypadClient
-from lilypad_rag_agent.config import DEFAULT_LILYPAD_API_TOKEN
-from lilypad_rag_agent.logger import logger
+from document_processing import DocumentProcessor
+from vector_store import VectorStore
+from keyword_retriever import KeywordRetriever
+from api_client import LilypadClient
+from config import DEFAULT_LILYPAD_API_TOKEN
+from logger import logger
 from typing import Dict, Any
 
 class LilypadRAGAgent:
