@@ -2,7 +2,7 @@ import os
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.docstore.document import Document
-from support_agent.logger import logger
+from lilypad-rag-agent.logger import logger
 from typing import List
 
 

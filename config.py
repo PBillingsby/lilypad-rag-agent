@@ -2,7 +2,7 @@ import os
 
 # Configuration settings
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_DOCUMENT_PATH = os.path.join(BASE_DIR, "docs", "lilypadIssues.md")
+DEFAULT_DOCUMENT_PATH = os.path.join(BASE_DIR, "docs", "issues.md")
 VECTOR_STORE_DIR = "./chroma_db"
 DEFAULT_EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 LILYPAD_API_URL = "https://anura-testnet.lilypad.tech/api/v1/chat/completions"
