@@ -59,7 +59,7 @@ Ensure you have Python 3 installed, then install the required dependencies:
 ### **4. Run the Agent**
 
 Run the agent from the root directory of the repository:
-`python3 -m lilypad-rag-agent.cli`
+`python3 -m lilypad_rag_agent.cli`
 
 ## **Contributing**
 
