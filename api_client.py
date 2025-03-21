@@ -75,44 +75,55 @@ class LilypadClient:
 
 
     def _process_streaming_response(self, response: requests.Response) -> str:
-        """Process streaming response from Lilypad API"""
-        full_response = ""
-        current_event = None
-        
-        for line in response.iter_lines():
-            if not line:
-                continue
-                
-            line_str = line.decode("utf-8").strip()
-            # Track the current event type
-            if line_str.startswith("event:"):
-                current_event = line_str[6:].strip()
-                continue
-                
-            # Process data lines
-            if line_str.startswith("data:"):
-                data_str = line_str[5:].strip()
-                
-                # Skip completion marker
-                if data_str == "[DONE]":
-                    continue
-                    
-                # Process based on the current event type
-                if current_event == "delta":
-                    try:
-                        data = json.loads(data_str)
-                        
-                        # Extract content from the completion structure
-                        if "choices" in data and len(data["choices"]) > 0:
-                            message = data["choices"][0].get("message", {})
-                            content = message.get("content", "")
-                            
-                            if content:
-                                full_response += content
-                    except json.JSONDecodeError:
-                        # Log but continue on parse errors
-                        logger.debug(f"Failed to parse JSON in delta event: {data_str[:100]}...")
-                
-                # Skip other data types (status updates, etc.)
-        
-        return full_response.strip()
+        """Process streaming or full JSON response from Lilypad API."""
+        full_response = []
+
+        try:
+            # Check content type header to decide how to parse
+            content_type = response.headers.get("Content-Type", "")
+            is_streaming = "text/event-stream" in content_type
+
+            if is_streaming:
+                current_event = None
+
+                for line in response.iter_lines():
+                    if not line:
+                        continue
+
+                    line_str = line.decode("utf-8").strip()
+
+                    if line_str.startswith("event:"):
+                        current_event = line_str[len("event:"):].strip()
+                        continue
+
+                    if line_str.startswith("data:"):
+                        data_str = line_str[len("data:"):].strip()
+
+                        if data_str == "[DONE]":
+                            continue
+
+                        if current_event == "delta":
+                            try:
+                                data = json.loads(data_str)
+                                message = data.get("choices", [{}])[0].get("message", {})
+                                content = message.get("content", "")
+                                if content:
+                                    full_response.append(content)
+                            except json.JSONDecodeError:
+                                logger.debug(f"Failed to parse JSON in delta event: {data_str[:100]}...")
+
+            else:
+                # Non-streaming full JSON response
+                try:
+                    data = response.json()
+                    message = data.get("choices", [{}])[0].get("message", {})
+                    content = message.get("content", "")
+                    if content:
+                        full_response.append(content)
+                except Exception as e:
+                    logger.error(f"Failed to parse full JSON response: {e}")
+
+        except Exception as e:
+            logger.error(f"Error processing response: {e}")
+
+        return "".join(full_response).strip()
