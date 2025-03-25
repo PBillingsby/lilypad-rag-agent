@@ -17,3 +17,6 @@ chroma_db/
 # System-specific files
 .DS_Store
 Thumbs.db
+
+# Environment Variables
+.env
