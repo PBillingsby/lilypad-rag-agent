@@ -17,7 +17,7 @@ class DocumentProcessor:
     def process(self) -> List[Document]:
         """Process document and return chunks"""
         try:
-            loader = TextLoader(self.document_path)
+            loader = TextLoader(self.document_path, encoding="utf-8")
             raw_documents = loader.load()
             raw_content = raw_documents[0].page_content
 
